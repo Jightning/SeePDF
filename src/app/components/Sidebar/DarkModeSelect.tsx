@@ -6,7 +6,7 @@ import {
     MoonIcon,
     ComputerDesktopIcon,
 } from "@heroicons/react/20/solid";
-import { Listbox, Transition } from "@headlessui/react";
+import { Listbox, Transition, ListboxButton, ListboxOptions, ListboxOption } from "@headlessui/react";
 import { useTheme } from "next-themes";
 
 function classNames(...classes: string[]) {
@@ -66,7 +66,8 @@ export default function DarkModeSelector({className}: {className?: string}) {
             <Listbox value={selected} onChange={setSelected}>
             {({ open }) => (
                 <div className={'relative ' + className}>
-                    <Listbox.Button className='flex items-center cursor-pointer '>
+                    {/* Main button */}
+                    <ListboxButton className='flex items-center cursor-pointer '>
                         <MoonIcon
                             className='size-5 text-gray-900 dark:text-gray-50 hidden dark:inline'
                             aria-hidden='true'
@@ -75,8 +76,9 @@ export default function DarkModeSelector({className}: {className?: string}) {
                             className='size-5 text-gray-900 dark:text-gray-50 dark:hidden'
                             aria-hidden='true'
                         />
-                    </Listbox.Button>
+                    </ListboxButton>
 
+                    {/* Dropdown Menu */}
                     <Transition
                         show={open}
                         enter='transition ease-out duration-100'
@@ -86,9 +88,9 @@ export default function DarkModeSelector({className}: {className?: string}) {
                         leaveFrom='opacity-100'
                         leaveTo='opacity-0'
                     >
-                        <Listbox.Options className='absolute z-50 top-full list-none right-0 bg-white rounded-lg ring-1 ring-slate-900/10 shadow-lg overflow-hidden w-36 py-1 text-sm dark:bg-slate-800 dark:ring-0 mt-8'>
+                        <ListboxOptions className='absolute z-50 top-full list-none right-0 bg-white rounded-lg ring-1 ring-slate-900/10 shadow-lg overflow-hidden w-36 py-1 text-sm dark:bg-slate-800 dark:ring-0 mt-8'>
                             {themeOptions.map((themeOption) => (
-                                <Listbox.Option
+                                <ListboxOption
                                     key={themeOption.id}
                                     className={({ active, selected }) =>
                                         classNames(
@@ -117,9 +119,9 @@ export default function DarkModeSelector({className}: {className?: string}) {
                                             </span>
                                         </div>
                                     )}
-                                </Listbox.Option>
+                                </ListboxOption>
                                 ))}
-                            </Listbox.Options>
+                            </ListboxOptions>
                         </Transition>
                     </div>
                 )}

@@ -1,13 +1,18 @@
 .sidebar-container {
     width: 250px;
-    height: 100vh;
-    position: fixed;
     left: 0;
-    top: 0;
-    background-color: var(--background);
-    border: 3px solid;
+    margin-bottom: 4px;
+    top: 3px;
+    height: calc(100vh - 8px);
+    position: relative;
+    float: left;
+
+    background-color: var(--background-secondary);
+
+    /* border: 2px solid; */
     border-left: 0px;
     border-radius: 0 10px 10px 0;
+
     display: flex;
     flex-direction: column;
     box-sizing: border-box;
@@ -16,37 +21,300 @@
 .sidebar-header-container {
     display: flex;
     align-items: center;
-    border-bottom: solid 3px;
     height: fit-content;
 }
 .sidebar-title-container {
-    border-right: solid 3px;
     padding: 8px;
     width: fit-content;
     writing-mode: vertical-lr;
     font-family: 'OCR A Std', monospace;
 }
+.sidebar-header-content {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    flex: 1;
+    padding: 8px;
+    /* padding-right: 16px; */
+}
 .header-import-button {
     border: solid 1px;
     border-radius: 10px;
     border-color: var(--primary-gray);
-    padding: 4px;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+
+    float: left;
     text-align: center;
-    flex: 1;
-    margin: 0 16px;
+
+    width: 100%;
+    margin-right: 16px;
+    padding: 4px;
+
     cursor: pointer;
     background-color: var(--background);
     transition: background-color 0.2s;
+}
+.header-import-button svg {
+    width: 1.25rem;
+    height: 1.25rem;
+    margin-right: 4px;
 }
 .header-import-button:hover {
     background-color: var(--background-highlight);
     transition: background-color 0.2s;
 }
+.close-sidebar-button {
+    float: right;
+    border-radius: 10px;
+    padding: 4px;
+    margin-left: 8px;
+    width: fit-content;
+    height: fit-content;
+
+    cursor: pointer;
+    background-color: var(--background);
+    transition: background-color 0.2s;
+}
+.close-sidebar-button:hover {
+    background-color: var(--background-highlight);
+    transition: background-color 0.2s;
+}
+.close-sidebar-button > img {
+    width: 2.5rem;
+    height: 1.5rem;
+}
 /* Sidebar Header\ */
+
 /* Sidebar Instances */
 .sidebar-instances-container {
     height: 100%;
     width: 100%;
     padding: 8px;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    overflow: hidden;
+    position: relative;
 }
+.instances-list-container {
+    list-style-type: none;
+    margin: 8px 0;
+    overflow-y: auto;
+    flex: 1;
+    max-height: 100%;
+    padding-right: 4px;
+}
+.instances-list-container li {
+    border: solid 1px;
+    border-color: var(--primary-gray);
+    border-radius: 5px;
+    margin: 8px 0;
+    padding: 4px 6px;
+    cursor: pointer;
+    background-color: var(--background-secondary);
+    white-space: nowrap;
+    overflow: hidden;
+    position: relative;
+
+    display: flex;
+    align-items: center;
+}
+.instances-list-container li p {
+    display: inline;
+}
+.instances-list-container li:nth-child(1) {
+    margin-top: 0;
+}
+.instances-list-container li:nth-last-child(1) {
+    margin-bottom: 0;
+}
+.instances-list-container li::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    width: 40px;
+    height: 100%;
+    transform: rotate(180deg);
+    background: radial-gradient(circle at right, transparent 60%, var(--background-secondary) 80%);
+    pointer-events: none; 
+    z-index: 1;
+}
+.instances-list-container li:hover {
+    background-color: var(--background-highlight);
+}
+.instances-list-container li:hover::after {
+    width: 70%;
+    background: radial-gradient(circle at right, transparent 60%, var(--background-highlight) 80%);
+}
+
+.instance-choice-button {
+    display: none;
+    position: absolute;
+    right: 4px;
+    z-index: 2;
+    border-radius: 5px;
+    background-color: var(--background);
+    transition: background-color 0.2s;
+    cursor: pointer;
+}
+.instances-list-container li:hover > .instance-choice-button, .instance-choice-button.active {
+    display: inline !important;
+}
+.instances-list-container li:hover > .instance-choice-button:hover, .instance-choice-button.active {
+    background-color: var(--background-secondary);
+    /* transition: background-color 2s; */
+}
+
+/* Tooltip for instances */
+.instance-tooltip {
+    user-select: text;
+    padding: 8px;
+    border-radius: 10px;
+    background-color: var(--solid-theme);
+    font-size: small;
+}
+/* Tooltip for instances\ */
+
+/* Instance Details */
+.instance-popup-container {
+    background-color: var(--background-tertiary);
+    padding: 4px 8px;
+    border-radius: 10px;
+    width: fit-content;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.4), 0px 2px 4px rgba(0, 0, 0, 0.1);
+}
+.instance-popup-container button {
+    /* border: 1.5px solid; */
+    border-radius: 10px;
+
+    cursor: pointer;
+    font-size: 90%;
+
+    padding: 6px;
+    padding-right: 10px;
+    width: 100%;
+    margin: 4px 0;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: left;
+    gap: 0.5rem;
+    transition: background 0.2s;
+}
+.delete-icon {
+    color: #dc2626;
+}
+.icon {
+    width: 24px;
+    height: 24px;
+}
+.instance-popup-container button:hover {
+    background: var(--background-secondary);
+}
+.delete-icon:hover {
+    background: #ff00003b !important;
+}
+/* Instance Details\ */
+
 /* Sidebar Instances\ */
+
+/* Minimized Sidebar */
+.minimized-sidebar-container {
+    left: 0;
+    margin-bottom: 4px;
+    top: 3px;
+    height: calc(100vh - 8px);
+    position: relative;
+    float: left;
+
+    /* border: solid; */
+    display: flex;
+    flex-direction: column;
+
+    background-color: var(--background-secondary);
+
+    border-left: 0px;
+    border-radius: 0 10px 10px 0;
+}
+.sidebar-header-container-minimized {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: fit-content;
+    justify-content: center;
+}
+
+.sidebar-title-container-minimized {
+    padding: 8px;
+    padding-bottom: 0;
+    width: fit-content;
+    font-family: 'OCR A Std', monospace;
+}
+
+.sidebar-header-content-minimized {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    flex: 1;
+    padding: 8px;
+    /* padding-right: 16px; */
+}
+
+
+.open-sidebar-button {
+    border-radius: 10px;
+    padding: 4px;
+    margin: 16px 0;
+    width: fit-content;
+    height: fit-content;
+
+    cursor: pointer;
+    background-color: var(--background);
+    transition: background-color 0.2s;
+}
+.open-sidebar-button:hover {
+    background-color: var(--background-highlight);
+    transition: background-color 0.2s;
+}
+.open-sidebar-button > img {
+    width: 1.75rem;
+    height: 1.75rem;
+}
+
+.header-import-button-minimized {
+    /* border: solid 1px; */
+    border-radius: 10px;
+    margin: 16px 0;
+    margin-bottom: 40px;
+    border-color: var(--primary-gray);
+
+    text-align: center;
+
+    width: fit-content;
+    padding: 4px;
+
+    cursor: pointer;
+    background-color: var(--background);
+    transition: background-color 0.2s;
+}
+.header-import-button-minimized svg {
+    width: 1.75rem;
+    height: 1.75rem;
+}
+.header-import-button-minimized:hover {
+    background-color: var(--background-highlight);
+    transition: background-color 0.2s;
+}
+/* Minimized Sidebar\ */
