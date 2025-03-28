@@ -2,7 +2,6 @@
 
 import React, { useState } from 'react';
 import "./sidebar.css";
-import DarkModeSelector from './DarkModeSelect';
 import { Tooltip } from '@heroui/react';
 import { Instances } from '@/types';
 import { v4 as uuidv4 } from 'uuid';
@@ -10,6 +9,7 @@ import InstanceDetailsPopup from './InstanceDetails';
 import Image from 'next/image';
 import { Button } from '@heroui/react';
 import { DocumentArrowUpIcon } from '@heroicons/react/24/outline';
+import { ThemeChangerListbox } from './ThemeChangerListbox';
 
 const Sidebar = () => {
     const [openInstanceDetails, setOpenInstanceDetails] = useState("");
@@ -52,7 +52,7 @@ const Sidebar = () => {
                     <Button className='header-import-button-minimized'>
                         <DocumentArrowUpIcon/>
                     </Button>
-                    <DarkModeSelector/>
+                    <ThemeChangerListbox className='minimized-theme-container' />
                 </div>
             </div>
         </div>
@@ -67,7 +67,7 @@ const Sidebar = () => {
                         <DocumentArrowUpIcon/>
                         <p>Import</p>
                     </Button>
-                    <DarkModeSelector className=""/>
+                    <ThemeChangerListbox />
                     <div className={"close-sidebar-button"}
                         onClick={() => setIsSidebarOpen((prevOpen) => !prevOpen)}>
                         <Image 

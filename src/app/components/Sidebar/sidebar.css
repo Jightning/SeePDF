@@ -38,6 +38,7 @@
     padding: 8px;
     /* padding-right: 16px; */
 }
+
 .header-import-button {
     border: solid 1px;
     border-radius: 10px;
@@ -52,11 +53,11 @@
     text-align: center;
 
     width: 100%;
-    margin-right: 16px;
+    margin-right: 2px;
     padding: 4px;
 
     cursor: pointer;
-    background-color: var(--background);
+    background-color: var(--background-secondary);
     transition: background-color 0.2s;
 }
 .header-import-button svg {
@@ -68,16 +69,64 @@
     background-color: var(--background-highlight);
     transition: background-color 0.2s;
 }
+
+.theme-button {
+    display: flex;
+    border-radius: 10px;
+    margin: 4px;
+    padding: 14px 4px;
+
+    width: fit-content;
+    height: fit-content;
+
+    width: 2.5rem;
+    height: 1.5rem;
+    cursor: pointer;
+    background-color: var(--background-secondary);
+    transition: background-color 0.2s;
+}
+.theme-button:hover {
+    background-color: var(--background-highlight);
+    transition: background-color 0.2s;
+}
+.theme-dropdown {
+    border-radius: 10px;
+    padding: 4px;
+    background-color: var(--background-tertiary);
+}
+.theme-dropdown ul {
+    display: flex;
+    flex-direction: column;
+}
+/* dropdown items */
+.theme-dropdown span {
+    display: flex;
+    flex-direction: row;
+    margin: 10px;
+
+}
+.theme-dropdown li {
+    border-radius: 10px;
+}
+.theme-dropdown li:hover {
+    background-color: var(--background-secondary);
+    color: var(--theme-purple);
+}
+/* dropdown icons */
+.theme-dropdown span svg {
+    margin-right: 10px;
+}
+
 .close-sidebar-button {
     float: right;
     border-radius: 10px;
     padding: 4px;
-    margin-left: 8px;
+    /* margin-left: 8px; */
     width: fit-content;
     height: fit-content;
 
     cursor: pointer;
-    background-color: var(--background);
+    background-color: var(--background-secondary);
     transition: background-color 0.2s;
 }
 .close-sidebar-button:hover {
@@ -297,7 +346,6 @@
     /* border: solid 1px; */
     border-radius: 10px;
     margin: 16px 0;
-    margin-bottom: 40px;
     border-color: var(--primary-gray);
 
     text-align: center;
@@ -315,6 +363,28 @@
 }
 .header-import-button-minimized:hover {
     background-color: var(--background-highlight);
+    transition: background-color 0.2s;
+}
+
+.minimized-theme-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    margin: 16px 0;
+
+    width: calc(2rem + 4px);
+    height: calc(2rem + 4px);
+    cursor: pointer;
+    background-color: var(--background) !important;
+    transition: background-color 0.2s;
+}
+.minimized-theme-container svg {
+    width: 1.75rem;
+    height: 1.75rem;
+}
+.minimized-theme-container:hover {
+    background-color: var(--background-highlight) !important;
     transition: background-color 0.2s;
 }
 /* Minimized Sidebar\ */
