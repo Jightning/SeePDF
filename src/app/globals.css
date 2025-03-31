@@ -12,6 +12,8 @@
   --background-tertiary: #f5f5f5;
   --background-highlight: #dfdfdf;
   --solid-theme: #fff;
+  
+  --theme-purple: #9333ea;
 }
 
 .dark {
@@ -21,6 +23,8 @@
   --background-tertiary: #45444c;
   --background-highlight: #454545;
   --solid-theme: #000;
+
+  --theme-purple: #d8b4fe;
 }
 
 @theme inline {
