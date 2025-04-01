@@ -1,16 +1,16 @@
 "use client"
 
 import React, { useState } from 'react';
-import "./sidebar.css";
-import DarkModeSelector from './DarkModeSelect';
-import ThemeDropdown from './ThemeDropdown';
-import { Tooltip } from '@heroui/react';
-import { Instances } from '@/types';
 import { v4 as uuidv4 } from 'uuid';
 import InstanceDetailsPopup from './InstanceDetails';
 import Image from 'next/image';
-import { Button } from '@heroui/react';
+import { Button, Tooltip } from '@heroui/react';
 import { DocumentArrowUpIcon } from '@heroicons/react/24/outline';
+
+import { Instances } from '@/types';
+import ThemeDropdown from './ThemeDropdown';
+
+import "./sidebar.css";
 
 const Sidebar = () => {
     const [openInstanceDetails, setOpenInstanceDetails] = useState("");

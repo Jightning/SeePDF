@@ -4,7 +4,7 @@ import Sidebar from "./components/Sidebar/Sidebar";
 
 export default function Home() {
   return (
-    <div className="home-container min-h-screen font-[family-name:var(--font-geist-sans)]">
+    <div className="home-container relative overflow-hidden min-h-screen font-[family-name:var(--font-geist-sans)]">
       <Sidebar />
       <PDFView />
       <InfoView />
