@@ -1,26 +1,47 @@
-"use client"
+'use client';
 
-import React from 'react';
-// import { Document, Page } from 'react-pdf';
-// import 'react-pdf/dist/esm/Page/AnnotationLayer.css';
+import { useState } from 'react';
+import dynamic from 'next/dynamic'
+
 import './PDFView.css';
 
-const PDFView = () => {
-    const [numPages, setNumPages] = React.useState<number | null>(null);
+const PDFVirtualScroll = dynamic(() => import('./PDFVirtualScroll'))
+import { PDFFile } from '@/types';
 
-    const onDocumentLoadSuccess = ({ numPages }: { numPages: number }) => {
-        setNumPages(numPages);
-    };
-
-    return (
-        <div className="pdf-view-container">
-            {/* <Document file={file} onLoadSuccess={onDocumentLoadSuccess}>
-                {Array.from(new Array(numPages), (el, index) => (
-                    <Page key={`page_${index + 1}`} pageNumber={index + 1} />
-                ))}
-            </Document> */}
-        </div>
-    );
+const options = {
+  cMapUrl: '/cmaps/',
+  standardFontDataUrl: '/standard_fonts/',
 };
 
-export default PDFView;
+export default function PDFView() {
+    const [file, setFile] = useState<PDFFile>("/Lord_of_Mysteries.pdf");
+    // const [PDFBlob, setPDFBlob] = useState<any>(null)
+
+    function onFileChange(event: React.ChangeEvent<HTMLInputElement>): void {
+        const { files } = event.target;
+
+        const nextFile = files?.[0];
+
+        if (nextFile) {
+            setFile(nextFile);
+        }
+    }
+
+    return (
+        <div className="Example overflow-auto">
+            <header>
+                <h1>react-pdf sample page</h1>
+            </header>
+            <div className="Example__container">
+                <div className="Example__container__load">
+                    <label htmlFor="file">Load from file:</label>{' '}
+                    <input onChange={onFileChange} type="file" />
+                </div>
+
+                <div className="Example__container__document select-text">
+                    <PDFVirtualScroll file={file} initialPageNumber={100} />
+                </div>
+            </div>
+        </div>
+    );
+}

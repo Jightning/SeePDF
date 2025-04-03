@@ -15,25 +15,47 @@ import {
 import { useEffect, useState } from "react";
 import { useTheme } from "next-themes";
 
+type ThemeOption = {
+    id: string;
+    name: string;
+    icon: React.ReactNode;
+};
+
+const themeOptions: ThemeOption[] = [
+    {
+        id: "light",
+        name: "Light",
+        icon: <SunIcon className='size-5' />,
+    },
+    {
+        id: "dark",
+        name: "Dark",
+        icon: <MoonIcon className='size-5' />,
+    },
+    {
+        id: "system",
+        name: "System",
+        icon: <ComputerDesktopIcon className='size-5' />,
+    },
+];
+
 export default function ThemeDropdown ({className}: {className?: string}) {
-    const [selected, setSelected] = useState<React.Key | null>(null);
+    const [selected, setSelected] = useState<string | null>(null);
     const { setTheme } = useTheme();
     const [mounted, setMounted] = useState(false);
 
     useEffect(() => {
-        if (selected === "system" || selected === "dark" || selected === "light") {
-            setTheme(selected);
-            setSelected(selected);
-        }
-
+        selected && setTheme(selected);
+        setSelected(selected);  
     }, [selected, setTheme]);
 
-    // To wait until the component is mounted to avoid a flash of light theme
+    // To wait until the component is mounted to avoid a flash of light
     useEffect(() => {
         setMounted(true);
+        setSelected(localStorage.getItem("theme"));
     }, []);
 
-    // if (!mounted) return null;
+    if (!mounted) return null;
     return (
         <Dropdown>
             <DropdownTrigger>
@@ -52,22 +74,14 @@ export default function ThemeDropdown ({className}: {className?: string}) {
             <DropdownMenu 
                 aria-label="Theme" 
                 className='theme-dropdown'
-                onAction={(key) => setSelected(key)}
+                onAction={(key) => setSelected(key.toString())}
             >
-                <DropdownItem key="light">
-                    <SunIcon className="size-5" />
-                    <p>Light</p>
-                </DropdownItem>
-
-                <DropdownItem key="dark">
-                    <MoonIcon className="size-5" />
-                    <p>Dark</p>
-                </DropdownItem>
-
-                <DropdownItem key="system">
-                    <ComputerDesktopIcon className="size-5" />
-                    <p>System</p>
-                </DropdownItem>
+                {themeOptions.map((option: any) => (
+                    <DropdownItem key={option.id} className={selected===option.id ? "active": ""}>
+                        {option.icon}
+                        <p>{option.name}</p>
+                    </DropdownItem>
+                ))}
             </DropdownMenu>
         </Dropdown>
     );
