@@ -28,16 +28,17 @@ export default function PDFVirtualScroll (
         initialPageNumber 
     }: { file: PDFFile, initialPageNumber: number}) {
 
-    const [numPages, setNumPages] = useState<number>();
+    const [numPages, setNumPages] = useState<number>(0);
     const [startPage, setStartPage] = useState<number>(1)
-    const [endPage, setEndPage] = useState<number>(250)
+    const [endPage, setEndPage] = useState<number>(1)
     const [availablePages, setAvailablePages] = useState<any>(updatePages)
     const [containerWidth, setContainerWidth] = useState<number>();
     const { ref, inView } = useInView()
 
     function onDocumentLoadSuccess({ numPages: nextNumPages }: PDFDocumentProxy): void {
         setNumPages(nextNumPages);
-    } 
+        setEndPage(Math.min(250, nextNumPages))
+    }
 
     // Returns an array of the correct length
     function updatePages() {
@@ -53,24 +54,26 @@ export default function PDFVirtualScroll (
             setEndPage((prev: number) => (prev + 5))
         }
     }, [inView])
-
+    // console.log(startPage, endPage, numPages)
     return (
-        <Document 
-            file={file} 
-            onLoadSuccess={onDocumentLoadSuccess} 
-            options={options}
-            >
-            {availablePages.map((_: any, index: number) => (
-                <div key={`page_${index + startPage}`}>
-                <Page
-                    pageNumber={index + startPage}
-                    renderMode='canvas'
-                    width={containerWidth ? Math.min(containerWidth, maxWidth) : maxWidth}
-                />
-                {index + startPage === endPage - 4 && (<span ref={ref} />)}
-                </div> 
-            ))}
-            <div ref={ref}>Loading More...</div>
-        </Document>
+        <div className='pdf-virtual-scroll-container'>
+            <Document 
+                file={file} 
+                onLoadSuccess={onDocumentLoadSuccess} 
+                options={options}
+                >
+                {availablePages.map((_: any, index: number) => (
+                    <div key={`page_${index + startPage}`}>
+                    <Page
+                        pageNumber={index + startPage}
+                        renderMode='canvas'
+                        width={containerWidth ? Math.min(containerWidth, maxWidth) : maxWidth}
+                    />
+                    {index + startPage === endPage - 4 && (<span ref={ref} />)}
+                    </div> 
+                ))}
+                {(startPage + endPage <= numPages) && <div ref={ref}>Loading More...</div>}
+            </Document>
+        </div>
     )
 }

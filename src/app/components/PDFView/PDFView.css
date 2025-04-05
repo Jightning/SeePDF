@@ -1,60 +1,46 @@
-/* .pdf-view-container {
+.pdf-view-container {
     flex: 1;
     box-sizing: border-box;
     border-radius: 10px;
     width: 100%;
     height: auto;
-    margin: 4px 6px;
-    background-color: var(--background-tertiary);
-} */
-
-.Example input,
-.Example button {
-    font: inherit;
+    margin: 4px 60px;
+    background-color: var(--background);
+    position: relative;
 }
 
-.Example header {
+
+.pdf-header {
     background-color: #323639;
     box-shadow: 0 0 8px rgba(0, 0, 0, 0.5);
     padding: 20px;
     color: white;
+    position: fixed;
+    top: 0;
+    z-index: 1000;
 }
 
-.Example header h1 {
+.pdf-header h1 {
     font-size: inherit;
     margin: 0;
 }
 
-.Example__container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin: 10px 0;
-    padding: 10px;
-}   
-
-.Example__container__load {
-    margin-top: 1em;
-    color: white;
-}
-.Example__container__document {
+.pdf-virtual-scroll-container {
     width: 100%;
     max-width: calc(100% - 2em);
     margin: 1em 0;
+    user-select: text;
 }
-
-.Example__container__document .react-pdf__Document {
+.pdf-virtual-scroll-container .react-pdf__Document {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
-
-.Example__container__document .react-pdf__Page {
+.pdf-virtual-scroll-container .react-pdf__Page {
     margin: 1em 0;
     box-shadow: 0 0 8px rgba(0, 0, 0, 0.5);
 }
-
-.Example__container__document .react-pdf__message {
+.pdf-virtual-scroll-container .react-pdf__message {
     padding: 20px;
     color: white;
 }

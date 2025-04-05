@@ -11,10 +11,11 @@ import { Instances } from '@/types';
 import ThemeDropdown from './ThemeDropdown';
 
 import "./sidebar.css";
+import { useHeader } from './Header';
 
 const Sidebar = () => {
-    const [openInstanceDetails, setOpenInstanceDetails] = useState("");
     const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+    const {isMinimized, Header} = useHeader()
 
     const instances: Instances[] = [
         {name: "First Item", id: uuidv4()}, 
@@ -34,74 +35,45 @@ const Sidebar = () => {
         {name: "Item 3", id: uuidv4()},
         {name: "Item 3", id: uuidv4()},
         {name: "Item 3", id: uuidv4()},
-        {name: "Item 3", id: uuidv4()}];
+        {name: "Item 3", id: uuidv4()}
+    ];
 
-    if (!isSidebarOpen) return (
+    if (isMinimized) return (
         <div className="minimized-sidebar-container">
-            <div className="sidebar-header-container-minimized">
-                <div className="sidebar-title-container-minimized"><h2 className='playwrite-hu'>SeePDF</h2></div>
-                <div className="sidebar-header-content-minimized">
-                    <div className={"open-sidebar-button"}
-                        onClick={() => setIsSidebarOpen((prevOpen) => !prevOpen)}>
-                        <Image 
-                            src={"/sidebar-open-svgrepo-com.svg"} 
-                            alt="Open Sidebar" 
-                            className="dark:invert"
-                            height={20}
-                            width={20}/>
-                    </div>
-                    <Button className='header-import-button-minimized'>
-                        <DocumentArrowUpIcon/>
-                    </Button>
-                    <ThemeDropdown className='minimized-theme-container' />
-                </div>
-            </div>
+            <Header/>
         </div>
     );
 
     return (
-        <div className='sidebar-container'>
-            <div className="sidebar-header-container">
-                <div className="sidebar-title-container"><h2 className='playwrite-hu'>SeePDF</h2></div>
-                <div className="sidebar-header-content">
-                    <Button className='header-import-button'>
-                        <DocumentArrowUpIcon/>
-                        <p>Import</p>
-                    </Button>
-                    <ThemeDropdown />
-                    <div className={"close-sidebar-button"}
-                        onClick={() => setIsSidebarOpen((prevOpen) => !prevOpen)}>
-                        <Image 
-                            src={"/sidebar-hide-svgrepo-com.svg"} 
-                            alt="Close Sidebar" 
-                            className="dark:invert"
-                            height={20}
-                            width={20}/>
-                    </div>
-                </div>
-            </div>
+        <div className={`${isMinimized
+                        ? "minimized-sidebar-container"
+                        : "sidebar-container"} 
+                        ${isSidebarOpen ? "open" : ""}`}>
+            <Header/>
             {/* All instances */}
-            <div className="sidebar-instances-container">
-                <h1 className="border-b-2 text-lg items-center w-fit pr-12">Instances</h1>
-                <ul className='instances-list-container'>
-                    {instances.map((instance) => (
-                        <Tooltip 
-                            content={instance.name}
-                            className="instance-tooltip" 
-                            delay={500} 
-                            closeDelay={100} 
-                            showArrow={true} 
-                            offset={-2}
-                            key={instance.id}
-                        >
-                            <li>
-                                <p>{instance.name}</p>
-                                <InstanceDetailsPopup />
-                            </li>
-                        </Tooltip>
-                    ))}
-                </ul>
-            </div>
+            {!isMinimized && (
+                <div className="sidebar-instances-container">
+                    <h1 className="border-b-2 text-lg items-center w-fit pr-12">Instances</h1>
+                    <ul className='instances-list-container'>
+                        {instances.map((instance) => (
+                            <Tooltip 
+                                content={instance.name}
+                                className="instance-tooltip" 
+                                delay={500} 
+                                closeDelay={100} 
+                                showArrow={true} 
+                                offset={-2}
+                                key={instance.id}
+                            >
+                                <li>
+                                    <p>{instance.name}</p>
+                                    <InstanceDetailsPopup />
+                                </li>
+                            </Tooltip>
+                        ))}
+                    </ul>
+                </div>
+            )}
         </div>
     );
 };

@@ -28,20 +28,16 @@ export default function PDFView() {
     }
 
     return (
-        <div className="Example overflow-auto">
-            <header>
+        <div className="pdf-view-container overflow-auto">
+            <header className='pdf-header'>
                 <h1>react-pdf sample page</h1>
             </header>
-            <div className="Example__container">
-                <div className="Example__container__load">
+                {/* <div className="Example__container__load">
                     <label htmlFor="file">Load from file:</label>{' '}
                     <input onChange={onFileChange} type="file" />
-                </div>
+                </div> */}
 
-                <div className="Example__container__document select-text">
-                    <PDFVirtualScroll file={file} initialPageNumber={100} />
-                </div>
-            </div>
+            <PDFVirtualScroll file={file} initialPageNumber={100} />
         </div>
     );
 }
