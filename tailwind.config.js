@@ -1,8 +1,10 @@
 
 /** @type {import('tailwindcss').Config} */
+const defaultTheme = require('tailwindcss/defaultTheme');
+
 module.exports = {
   purge: [],
-  darkMode: 'class', // or 'media' or 'class'
+  darkMode: ['class', '[dark~="lord"]'], // or 'media' or 'class'
   theme: {
     extend: {},
   },
@@ -11,4 +13,4 @@ module.exports = {
   },
   plugins: [],
   content: ["./src/**/*.html", "./src/**/*.{js,jsx,ts,tsx}"],
-}
+} 

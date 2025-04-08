@@ -3,12 +3,9 @@
 import React, { useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import InstanceDetailsPopup from './InstanceDetails';
-import Image from 'next/image';
-import { Button, Tooltip } from '@heroui/react';
-import { DocumentArrowUpIcon } from '@heroicons/react/24/outline';
+import { Tooltip } from '@heroui/react';
 
 import { Instances } from '@/types';
-import ThemeDropdown from './ThemeDropdown';
 
 import "./sidebar.css";
 import { useHeader } from './Header';

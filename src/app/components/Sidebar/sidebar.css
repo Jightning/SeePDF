@@ -44,7 +44,7 @@
 .header-import-button {
     border: solid 1px;
     border-radius: 10px;
-    border-color: var(--primary-gray);
+    border-color: var(--border);
 
     display: flex;
     flex-direction: row;
@@ -88,11 +88,24 @@
 .theme-button > svg {
     width: 2.5rem;
     height: 1.5rem;
+    color: var(--foreground);
 }
 .theme-button:hover {
     background-color: var(--background-highlight);
     transition: background-color 0.2s;
 }
+/* Theme based appearance for the buttons */
+.dark .theme-button-moonicon, .lord .theme-button-moonicon  {
+    --tw-text-opacity: 1;
+    color: rgb(249 250 251 / var(--tw-text-opacity));
+    display: inline;
+}
+.dark .theme-button-sunicon, .lord .theme-button-sunicon {
+    --tw-text-opacity: 1;
+    color: rgb(249 250 251 / var(--tw-text-opacity));
+    display: none;
+}
+/*  */
 .theme-dropdown {
     border-radius: 10px;
     padding: 4px;
@@ -211,13 +224,14 @@
 .open-sidebar-button > img {
     width: 1.75rem;
     height: 1.75rem;
+    color: var(--foreground);
 }
 
 .header-import-button-minimized {
     /* border: solid 1px; */
     border-radius: 10px;
     margin: 16px 0;
-    border-color: var(--primary-gray);
+    border-color: var(--border);
 
     text-align: center;
 
@@ -253,6 +267,7 @@
 .minimized-theme-container svg {
     width: 1.75rem;
     height: 1.75rem;
+    color: var(--foreground);
 }
 .minimized-theme-container:hover {
     background-color: var(--background-highlight) !important;

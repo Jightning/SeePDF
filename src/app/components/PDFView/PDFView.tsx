@@ -29,9 +29,6 @@ export default function PDFView() {
 
     return (
         <div className="pdf-view-container overflow-auto">
-            <header className='pdf-header'>
-                <h1>react-pdf sample page</h1>
-            </header>
                 {/* <div className="Example__container__load">
                     <label htmlFor="file">Load from file:</label>{' '}
                     <input onChange={onFileChange} type="file" />

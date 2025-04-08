@@ -1,4 +1,4 @@
-import { DocumentArrowUpIcon } from '@heroicons/react/24/outline';
+import { DocumentArrowUpIcon, ChevronDoubleLeftIcon, ChevronDoubleRightIcon } from '@heroicons/react/24/outline';
 import { Button } from "@heroui/react"
 import ThemeDropdown from './ThemeDropdown';
 import Image from 'next/image';

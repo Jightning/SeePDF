@@ -11,6 +11,7 @@ import {
     SunIcon,
     MoonIcon,
     ComputerDesktopIcon,
+    BellIcon
 } from "@heroicons/react/20/solid";
 import { useEffect, useState } from "react";
 import { useTheme } from "next-themes";
@@ -37,6 +38,11 @@ const themeOptions: ThemeOption[] = [
         name: "System",
         icon: <ComputerDesktopIcon className='size-5' />,
     },
+    {
+        id: "lord",
+        name: "Lord",
+        icon: <BellIcon className='size-5' />,
+    },
 ];
 
 export default function ThemeDropdown ({className}: {className?: string}) {
@@ -46,7 +52,7 @@ export default function ThemeDropdown ({className}: {className?: string}) {
 
     useEffect(() => {
         selected && setTheme(selected);
-        setSelected(selected);  
+        setSelected(selected);
     }, [selected, setTheme]);
 
     // To wait until the component is mounted to avoid a flash of light
@@ -61,11 +67,11 @@ export default function ThemeDropdown ({className}: {className?: string}) {
             <DropdownTrigger>
                 <Button className={'theme-button ' + className}>
                     <MoonIcon
-                        className='size-5 text-gray-900 dark:text-gray-50 hidden dark:inline'
+                        className='theme-button-moonicon size-5 text-gray-900 hidden'
                         aria-hidden='true'
                     />
                     <SunIcon
-                        className='size-5 text-gray-900 dark:text-gray-50 dark:hidden'
+                        className='theme-button-sunicon size-5 text-gray-900'
                         aria-hidden='true'
                     />
                 </Button>
