@@ -18,6 +18,7 @@
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.4);
 
     transition: width 0.03s ease-in-out;
+    z-index: 10;
 }
 /* Sidebar Header */
 .sidebar-header-container {
@@ -94,18 +95,7 @@
     background-color: var(--background-highlight);
     transition: background-color 0.2s;
 }
-/* Theme based appearance for the buttons */
-.dark .theme-button-moonicon, .lord .theme-button-moonicon  {
-    --tw-text-opacity: 1;
-    color: rgb(249 250 251 / var(--tw-text-opacity));
-    display: inline;
-}
-.dark .theme-button-sunicon, .lord .theme-button-sunicon {
-    --tw-text-opacity: 1;
-    color: rgb(249 250 251 / var(--tw-text-opacity));
-    display: none;
-}
-/*  */
+
 .theme-dropdown {
     border-radius: 10px;
     padding: 4px;

@@ -4,7 +4,8 @@ import Image from 'next/image';
 import { useState } from 'react';
 
 export function useHeader() {
-    const [isSidebarClosed, setIsSidebarClosed] = useState(false);
+    const [isSidebarClosed, setIsSidebarClosed] = useState(false);    
+    
     let Header = () => (
         <div className="info-view-header-container">
             <div className={"close-info-view-button"}
@@ -12,7 +13,7 @@ export function useHeader() {
                 <Image 
                     src={"/sidebar-open-svgrepo-com.svg"} 
                     alt="Close Info View" 
-                    className="dark:invert"
+                    className={"invertible"}
                     height={20}
                     width={20}/>
             </div>
@@ -31,7 +32,7 @@ export function useHeader() {
                     <Image 
                         src={"/sidebar-hide-svgrepo-com.svg"} 
                         alt="Open Info View" 
-                        className="dark:invert"
+                        className="invertible"
                         height={20}
                         width={20}/>
                 </div>

@@ -1,18 +1,15 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Popover, PopoverTrigger, PopoverContent, Button } from "@heroui/react"
 import {TrashIcon, PencilSquareIcon, EllipsisVerticalIcon} from "@heroicons/react/24/outline";
+import { SeePDFContext } from '@/providers/Provider';
+import { Instance } from '@/types';
 
 
-interface InstanceDetailsPopupProps {
-    instanceName: string;
-    onEdit: (newName: string) => void;
-    onDelete: () => void;
-    onClose: () => void;
-}
 
-const InstanceDetailsPopup= () => {
+const InstanceDetailsPopup = ({instance, setEditing}: {instance: Instance, setEditing: any}) => {
     const [isOpen, setIsOpen] = useState<Boolean>(false);
-    const [isEditing, setIsEditing] = useState(false);
+
+    const { adjustInstances, deleteInstance } = useContext(SeePDFContext)
 
     return (
         <Popover 
@@ -26,11 +23,11 @@ const InstanceDetailsPopup= () => {
             </PopoverTrigger>
             <PopoverContent>
                 <div className="instance-popup-container">
-                    <Button className="">
+                    <Button className="" onPress={() => setEditing(instance)}>
                         <PencilSquareIcon className="icon"/>
                         <p>Rename</p>
                     </Button>
-                    <Button className='delete-icon text-red-600'>
+                    <Button className='delete-icon text-red-600' onPress={() => deleteInstance(instance.id)}>
                         <TrashIcon className="icon"/>
                         <p>Delete</p>
                     </Button>

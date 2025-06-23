@@ -1,4 +1,10 @@
-# General
+# Docs
+
+## General
+### Working with Theme:
+- Use the `invertible` (modified in `global.css`) class to invert based on dark/light mode
+[Go to Sidebar for more on adding new themes](#sidebar)
+
 
 ## InfoView
 
@@ -14,7 +20,7 @@
 | **File**                 | **Description**                                                                 |
 |-|-|
 | `PDFView.tsx`| Contains the principle view of the PDF |
-| `PDFVirtualScroll.tsx`| Contains the PDF. Uses `react-window` to ensure that only the pages in/near the viewport are rendered so as to not not crash website with massive documents. |
+| `PDFWindow.tsx`| Contains the PDF. Uses `react-window` to ensure that only the pages in/near the viewport are rendered so as to not not crash website with massive documents. |
 | `PDFView.css`| Styling |
 
 
@@ -34,6 +40,7 @@
 1. First add the theme's object to `themeOptions` in `ThemeDropdown.tsx`.
 2. Add the theme as a class into `~/app/global.css`.
     - If you want to theme to inherit dark mode attributes, add in `color-scheme: dark;` to the class.
+3. In the `ThemeProvider` in `~\src\providers\Provider.tsx`, add the theme's id to the array in `themes`.
 
 ---
 

@@ -2,6 +2,7 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 
+/* Themes */
 :root {
   --primary-gray: #858585;
   --dark-gray: #2d2d2d;
@@ -16,8 +17,9 @@
   --solid-theme: #fff;
   
   --theme-purple: #9333ea;
-}
+  --invert: 0;
 
+}
 
 .dark {
   --background: linear-gradient(180deg, rgb(35, 35, 35) 0.00%,rgb(35, 35, 35) 00.00%,rgb(38, 38, 38) 75.00%,rgb(41, 41, 41) 100.00%);;
@@ -29,6 +31,7 @@
   --solid-theme: #000;
 
   --theme-purple: #d8b4fe;
+  --invert: 1;
 }
 
 /* Test dark */
@@ -43,7 +46,11 @@
   --foreground: #ededed;
   --border: #858585;
   --solid-theme: #000;
+  --invert: 1;
+}
 
+.invertible {
+  filter: invert(var(--invert));
 }
 
 @theme inline {
@@ -52,6 +59,7 @@
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
+/* Themes\ */
 
 body {
   background: var(--background);

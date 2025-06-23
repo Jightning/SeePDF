@@ -1,10 +1,9 @@
 
 /** @type {import('tailwindcss').Config} */
-const defaultTheme = require('tailwindcss/defaultTheme');
 
 module.exports = {
   purge: [],
-  darkMode: ['class', '[dark~="lord"]'], // or 'media' or 'class'
+  darkMode: ['class'], // or 'media' or 'class'
   theme: {
     extend: {},
   },

@@ -1,39 +1,27 @@
 "use client"
 
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import InstanceDetailsPopup from './InstanceDetails';
 import { Tooltip } from '@heroui/react';
 
-import { Instances } from '@/types';
+import { Instance } from '@/types';
 
 import "./sidebar.css";
 import { useHeader } from './Header';
 
+import { SeePDFContext } from '@/providers/Provider';
+
 const Sidebar = () => {
     const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+    const [editing, setEditing] = useState<Instance | null>(null);
     const {isMinimized, Header} = useHeader()
 
-    const instances: Instances[] = [
-        {name: "First Item", id: uuidv4()}, 
-        {name: "Item 2222222222222222222222222222222222222222222222", id: uuidv4()}, 
-        {name: "Item 3", id: uuidv4()},
-        {name: "Item 3", id: uuidv4()},
-        {name: "Item 3", id: uuidv4()},
-        {name: "Item 3", id: uuidv4()},
-        {name: "Item 3", id: uuidv4()},
-        {name: "Item 3", id: uuidv4()},
-        {name: "Item 3", id: uuidv4()},
-        {name: "Item 3", id: uuidv4()},
-        {name: "Item 3", id: uuidv4()},
-        {name: "Item 3", id: uuidv4()},
-        {name: "Item 3", id: uuidv4()},
-        {name: "Item 3", id: uuidv4()},
-        {name: "Item 3", id: uuidv4()},
-        {name: "Item 3", id: uuidv4()},
-        {name: "Item 3", id: uuidv4()},
-        {name: "Item 3", id: uuidv4()}
-    ];
+    const { instances, adjustInstances, setPDFInstance } = useContext(SeePDFContext)
+
+    const openInstance = (instance: Instance) => {
+        setPDFInstance(instance);
+    }
 
     if (isMinimized) return (
         <div className="minimized-sidebar-container">
@@ -52,7 +40,7 @@ const Sidebar = () => {
                 <div className="sidebar-instances-container">
                     <h1 className="border-b-2 text-lg items-center w-fit pr-12">Instances</h1>
                     <ul className='instances-list-container'>
-                        {instances.map((instance) => (
+                        {instances.map((instance: Instance) => (
                             <Tooltip 
                                 content={instance.name}
                                 className="instance-tooltip" 
@@ -62,10 +50,31 @@ const Sidebar = () => {
                                 offset={-2}
                                 key={instance.id}
                             >
-                                <li>
-                                    <p>{instance.name}</p>
-                                    <InstanceDetailsPopup />
-                                </li>
+                                {editing && editing.id === instance.id ? (
+                                        <form
+                                            onSubmit={e => {
+                                                e.preventDefault();
+                                                adjustInstances(editing);
+                                                setEditing(null);
+                                            }}
+                                            style={{ display: 'flex', alignItems: 'center', gap: 4 }}
+                                        >
+                                            <input
+                                                value={editing.name}
+                                                onChange={e => setEditing((prev: any) => ({...prev, name: e.target.value}))}
+                                                autoFocus
+                                                onBlur={() => {
+                                                    adjustInstances(editing);
+                                                    setEditing(null);
+                                                }}
+                                            />
+                                        </form>
+                                    ) : (
+                                    <li onClick={() => openInstance(instance)}>
+                                        <p>{instance.name}</p>
+                                        <InstanceDetailsPopup instance={instance} setEditing={setEditing} />
+                                    </li> 
+                                )}
                             </Tooltip>
                         ))}
                     </ul>
